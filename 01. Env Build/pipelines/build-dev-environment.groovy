@@ -1,6 +1,7 @@
 pipeline {
     agent {
         label 'docker-host'
+        dockerfile true
     }
     options {
         disableConcurrentBuilds()
@@ -23,6 +24,7 @@ pipeline {
                 credentialsId: '21f01d09-06da9cc35103',
                 url: 'git@mysecret-nonexistent-repo/jenkins.git'
               }
+              echo '1'
             }
         }
         stage('Create latest Docker image') {
@@ -42,6 +44,7 @@ pipeline {
                     echo "Skipping STEP1"
                 }
               }
+              echo '2'
             }
         }
         stage('Start new container using latest image and create user') {
@@ -61,6 +64,7 @@ pipeline {
                 echo "Docker container created: $containerName"
 
               }
+              echo '3'
             }
         }
     }
